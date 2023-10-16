@@ -1,0 +1,10 @@
+**/*.test.ts
+**/.yarn/
+**/.exercism
+**/node_modules
+**/.eslintignore
+**/*.cjs
+**/*.yml
+**/*.md
+**/*.json
+**/*.lock
