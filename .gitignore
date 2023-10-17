@@ -4,6 +4,6 @@
 **/.eslintignore
 **/*.cjs
 **/*.yml
-**/*.md
 **/*.json
 **/*.lock
+**/*.mjs
