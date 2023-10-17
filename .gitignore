@@ -1,4 +1,3 @@
-**/*.test.ts
 **/.yarn/
 **/.exercism
 **/node_modules
