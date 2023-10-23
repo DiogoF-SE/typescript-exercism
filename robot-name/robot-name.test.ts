@@ -1,4 +1,4 @@
-import { Robot } from './robot-name'
+import { Robot } from "./robot-name"
 
 const areSequential = (name1: string, name2: string): boolean => {
   const alpha1 = name1.substr(0, 2)
@@ -24,7 +24,7 @@ const TOTAL_NUMBER_OF_NAMES =
   10 * // 0-9
   10 // 0-9
 
-describe('Robot', () => {
+describe("Robot", () => {
   let robot: Robot
 
   beforeEach(() => {
@@ -35,20 +35,20 @@ describe('Robot', () => {
     Robot.releaseNames()
   })
 
-  it('has a name', () => {
+  it("has a name", () => {
     expect(robot.name).toMatch(NAME_RE)
   })
 
-  xit('name is the same each time', () => {
+  it("name is the same each time", () => {
     expect(robot.name).toEqual(robot.name)
   })
 
-  xit('different robots have different names', () => {
+  it("different robots have different names", () => {
     const differentRobot = new Robot()
     expect(differentRobot.name).not.toEqual(robot.name)
   })
 
-  xit('is able to reset the name', () => {
+  it("is able to reset the name", () => {
     const originalName = robot.name
 
     robot.resetName()
@@ -58,7 +58,7 @@ describe('Robot', () => {
     expect(originalName).not.toEqual(newName)
   })
 
-  xit('should set a unique name after reset', () => {
+  it("should set a unique name after reset", () => {
     const NUMBER_OF_ROBOTS = 10000
     const usedNames = new Set()
 
@@ -71,7 +71,7 @@ describe('Robot', () => {
     expect(usedNames.size).toEqual(NUMBER_OF_ROBOTS + 1)
   })
 
-  xit('new names should not be sequential', () => {
+  it("new names should not be sequential", () => {
     const name1 = robot.name
     const name2 = new Robot().name
     const name3 = new Robot().name
@@ -80,7 +80,7 @@ describe('Robot', () => {
     expect(areSequential(name2, name3)).toBe(false)
   })
 
-  xit('names from reset should not be sequential', () => {
+  it("names from reset should not be sequential", () => {
     const name1 = robot.name
     robot.resetName()
     const name2 = robot.name
@@ -91,44 +91,56 @@ describe('Robot', () => {
     expect(areSequential(name3, name3)).toBe(true)
   })
 
-  xit('uses all letters', () => {
-    let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  it("uses all letters", () => {
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     for (let i = 0; i < 1000 - 1; i += 1) {
       const newRobot = new Robot()
       const lettersInName = newRobot.name.slice(0, 2)
-      letters = letters.replace(lettersInName[0], '')
-      letters = letters.replace(lettersInName[1], '')
+      letters = letters.replace(lettersInName[0], "")
+      letters = letters.replace(lettersInName[1], "")
 
       if (letters.length === 0) {
         break
       }
     }
-    expect(letters).toEqual('')
+    expect(letters).toEqual("")
   })
 
-  xit('uses all numbers', () => {
-    let numbers = '0123456789'
+  it("uses all numbers", () => {
+    let numbers = "0123456789"
 
     for (let i = 0; i < 1000 - 1; i += 1) {
       const newRobot = new Robot()
       const digitsInName = newRobot.name.slice(2, 5)
-      numbers = numbers.replace(digitsInName[0], '')
-      numbers = numbers.replace(digitsInName[1], '')
-      numbers = numbers.replace(digitsInName[2], '')
+      numbers = numbers.replace(digitsInName[0], "")
+      numbers = numbers.replace(digitsInName[1], "")
+      numbers = numbers.replace(digitsInName[2], "")
 
       if (numbers.length === 0) {
         break
       }
     }
-    expect(numbers).toEqual('')
+    expect(numbers).toEqual("")
+  })
+
+  it("should add used names to the set of used names", () => {
+    Robot.releaseNames()
+    const robot1 = new Robot()
+    const robot2 = new Robot()
+    const robot3 = new Robot()
+
+    expect(Robot.usedRobotNames.size).toEqual(3)
+    expect(Robot.usedRobotNames.has(robot1.name)).toBe(true)
+    expect(Robot.usedRobotNames.has(robot2.name)).toBe(true)
+    expect(Robot.usedRobotNames.has(robot3.name)).toBe(true)
   })
 
   // This test is optional.
   //
   // This test doesn't run on our online test runner because it will time-out
   // with most implementations. It's up to you to test your solution locally.
-  it.skip('all the names can be generated', () => {
+  it("all the names can be generated", () => {
     const usedNames = new Set()
     usedNames.add(robot.name)
 
